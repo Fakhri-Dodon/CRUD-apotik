@@ -5,21 +5,16 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get("/", function () {
+    return view('users.login'); // This is the GET route for showing the login form
+})->name('login');
 
-Route::get('/', [Controller::class, 'landing'])->name('home');
+Route::post('/login', [UserController::class, 'loginAuth'])->name('login.auth'); // This is the POST route for login
 
+Route::get('/home', [Controller::class, 'landing'])->name('home.page'); // Define the home route
 
-// Other routes...
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
 
 Route::prefix('/medicines')->name('medicines.')->group(function(){
     Route::get('/add', [MedicineController::class, 'create'])->name('create');
