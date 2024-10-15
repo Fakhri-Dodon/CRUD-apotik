@@ -10,10 +10,13 @@ Route::get("/", function () {
 })->name('login');
 Route::post('/login', [UserController::class, 'loginAuth'])->name('login.auth');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-
 Route::get('/home', [Controller::class, 'landing'])->name('home.page'); // Define the home route
 
-route::middleware(['lslogin'])->group(function () {
+route::get('/error-permission', function(){
+    return view('error.permission');
+})->name('error.permission');
+
+route::middleware(['lslogin','lsadmin'])->group(function () {
     route::get('/home', function () {
         return view('home');
     })->name('home.page');
@@ -37,3 +40,8 @@ route::middleware(['lslogin'])->group(function () {
     });
 });
 
+route::middleware(['lslogin','lsuser'])->group(function () {
+    route::get('/home', function () {
+        return view('home');
+    })->name('home.page');
+});
