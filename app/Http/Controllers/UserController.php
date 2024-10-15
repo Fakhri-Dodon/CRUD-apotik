@@ -52,18 +52,19 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id)
-    { 
+    {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'role' => 'required|string|in:admin,user', // Validasi untuk role
             'password' => 'nullable|string|min:6'
         ]);
-    User::where('id', $id)->update([
-        'name'=> $request->name,
-        'email'=> $request->email,
-        'password'=> bcrypt($request->password),
-        'role'=> $request->role, ]);
+        User::where('id', $id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+        ]);
 
 
         return redirect()->route('user.index')->with('success', 'User updated successfully!');
@@ -86,13 +87,22 @@ class UserController extends Controller
         ]);
 
         $user = $request->only(['email', 'password']);
+
         if (Auth::attempt($user)) {
-            return redirect()->route('home.page');
+            // Check if the user has the required permissions
+            $authenticatedUser = Auth::user();
+
+            // Here, replace 'required_permission' with your actual permission check
+            if ($authenticatedUser->role !== 'admin') {
+                return redirect()->route('error.permission'); // Redirect to permission error page
+            }
+
+            return redirect()->route('home.page'); // Redirect to home page
         } else {
             return redirect()->back()->with('failed', 'Proses login gagal, silahkan coba kembali dengan data yang benar!');
-
         }
     }
+
     public function logout()
     {
         //menghapus session Auth

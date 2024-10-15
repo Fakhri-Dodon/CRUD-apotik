@@ -1,23 +1,24 @@
 <?php
-
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", function () {
-    return view('users.login'); // This is the GET route for showing the login form
+    return view('users.login');
 })->name('login');
+
 Route::post('/login', [UserController::class, 'loginAuth'])->name('login.auth');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-Route::get('/home', [Controller::class, 'landing'])->name('home.page'); // Define the home route
-
-route::get('/error-permission', function(){
-    return view('error.permission');
+Route::get('/home', [Controller::class, 'landing'])->name('home.page');
+Route::get('/error-permission', function () {
+    return view('errors.permission');
 })->name('error.permission');
 
-route::middleware(['lslogin','lsadmin'])->group(function () {
-    route::get('/home', function () {
+
+// Define the home route in one place
+Route::middleware(['lslogin', 'lsadmin'])->group(function () {
+    Route::get('/users', function () {
         return view('home');
     })->name('home.page');
 
@@ -29,7 +30,7 @@ route::middleware(['lslogin','lsadmin'])->group(function () {
         Route::get('/edit/{id}', [MedicineController::class, 'edit'])->name('edit');
         Route::patch('/medicine/edit/{id}', [MedicineController::class, 'update'])->name('update');
     });
-
+    
     Route::prefix('/users')->name('user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/create', [UserController::class, 'create'])->name('create');
@@ -40,8 +41,8 @@ route::middleware(['lslogin','lsadmin'])->group(function () {
     });
 });
 
-route::middleware(['lslogin','lsuser'])->group(function () {
-    route::get('/home', function () {
-        return view('home');
-    })->name('home.page');
+Route::middleware(['lslogin', 'lsuser'])->group(function () {
+    Route::get('/users', function () {
+        return view('login');
+    })->name('users.login');
 });

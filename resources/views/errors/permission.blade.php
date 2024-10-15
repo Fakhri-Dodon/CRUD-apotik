@@ -1,3 +1,6 @@
+@extends('layouts.layout_login')
+@csrf
+
 <!doctype html>
 <html lang="en">
   <head>
