@@ -15,13 +15,14 @@ Route::get('/error-permission', function () {
     return view('errors.permission');
 })->name('error.permission');
 
-
-// Define the home route in one place
 Route::middleware(['lslogin', 'lsadmin'])->group(function () {
-    Route::get('/users', function () {
-        return view('home');
-    })->name('home.page');
-
+    Route::get('/users', [UserController::class, 'index'])->name('user.index'); // User index for admin
+    Route::get('/users/create', [UserController::class, 'create'])->name('user.create'); // Proper naming
+    Route::post('/users', [UserController::class, 'store'])->name('user.store'); // Proper naming
+    Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('user.edit'); // Proper naming
+    Route::patch('/users/{id}', [UserController::class, 'update'])->name('user.update'); // Proper naming
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.delete'); // Proper naming
+    
     Route::prefix('/medicines')->name('medicines.')->group(function () {
         Route::get('/add', [MedicineController::class, 'create'])->name('create');
         Route::post('/add', [MedicineController::class, 'store'])->name('store');
@@ -30,19 +31,10 @@ Route::middleware(['lslogin', 'lsadmin'])->group(function () {
         Route::get('/edit/{id}', [MedicineController::class, 'edit'])->name('edit');
         Route::patch('/medicine/edit/{id}', [MedicineController::class, 'update'])->name('update');
     });
-    
-    Route::prefix('/users')->name('user.')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::get('/create', [UserController::class, 'create'])->name('create');
-        Route::post('/', [UserController::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-        Route::patch('/{id}', [UserController::class, 'update'])->name('update');
-        Route::delete('/{id}', [UserController::class, 'destroy'])->name('delete');
-    });
 });
 
 Route::middleware(['lslogin', 'lsuser'])->group(function () {
-    Route::get('/users', function () {
-        return view('login');
-    })->name('users.login');
+    Route::get('/user/login', function () {
+        return view('users.login');
+    })->name('users.login'); // Changed route to avoid conflict
 });
