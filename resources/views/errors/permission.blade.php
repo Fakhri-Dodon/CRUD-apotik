@@ -1,4 +1,4 @@
-@extends('layouts.layout_login')
+
 @csrf
 
 <!doctype html>

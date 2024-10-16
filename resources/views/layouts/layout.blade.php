@@ -16,6 +16,7 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
+                  @if (Auth::check())
                   <li class="nav-item">
                     <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" aria-current="page" href="{{ route('home.page') }}">Dashboard</a>
                   </li>
@@ -34,7 +35,6 @@
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{route('user.index')}}">Kelola Akun</a>
                   </li>
-                  @if (Auth::check())
                   <li class="nav-item">
                       <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                           @csrf

@@ -36,5 +36,5 @@ Route::middleware(['lslogin', 'lsadmin'])->group(function () {
 Route::middleware(['lslogin', 'lsuser'])->group(function () {
     Route::get('/user/login', function () {
         return view('users.login');
-    })->name('users.login'); // Changed route to avoid conflict
+    })->name('users.login');
 });
