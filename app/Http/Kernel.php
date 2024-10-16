@@ -64,10 +64,9 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'lslogin' => \App\Http\Middleware\IsLogin::class,
-        'lsguest' => \App\Http\Middleware\IsLogin::class,
-        'lsadmin' => \App\Http\Middleware\IsLogin::class,
-        'lsuser' => \App\Http\Middleware\IsLogin::class,
+        'Islogin' => \App\Http\Middleware\IsLogin::class,
+        'IsGuest' => \App\Http\Middleware\IsGuest::class,
+        'IsAdmin' => \App\Http\Middleware\IsAdmin::class,
     ];
     
 }

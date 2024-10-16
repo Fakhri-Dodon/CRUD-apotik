@@ -16,10 +16,11 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                  @if (Auth::check())
+                @if (Auth::check())
                   <li class="nav-item">
                     <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" aria-current="page" href="{{ route('home.page') }}">Dashboard</a>
                   </li>
+                @if (Auth::user()->role == "admin")
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ Route::is('medicines.create') || Route::is('medicines.index') || Route::is('medicines.edit') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Obat
@@ -29,12 +30,15 @@
                       <li><a class="dropdown-item" href="{{route('medicines.create')}}">Tambah</a></li>
                     </ul>
                   </li>
+                @endif
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">Pembelian</a>
                   </li>
+                @if (Auth::user()->role == "admin")
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{route('user.index')}}">Kelola Akun</a>
                   </li>
+                @endif
                   <li class="nav-item">
                       <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                           @csrf

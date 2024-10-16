@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="jumbotron py-4 px-5">
+        @if (Session::get('success'))
+            <div class="alert alert-success">{{ Session::get('success') }}</div>
+        @endif
+        @if (Session::get('failed'))
+            <div class="alert alert-danger">{{ Session::get('failed') }}</div>
+        @endif
         <h1 class="display-4">
             Selamat Datang {{ Auth::user()->name}}!
         </h1>

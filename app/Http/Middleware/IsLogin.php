@@ -17,7 +17,7 @@ class IsLogin
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()){
-                return $next($request);
+            return $next($request);
         }else{
             return redirect()->route("login")->with("canAccess","Silahkan Login Terlebih Dahulu!");
         }

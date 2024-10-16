@@ -16,10 +16,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role =="admin") {
+        if (Auth::user()->role == 'admin') {
                 return $next($request);
         }else{
-            return redirect()->route("error.permission");
+            return redirect()->route('home.page')->with('failed', 'Anda (kasir) tidak memeiliki akses!');
         }
     }
 }

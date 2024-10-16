@@ -93,11 +93,11 @@ class UserController extends Controller
             $authenticatedUser = Auth::user();
 
             // Here, replace 'required_permission' with your actual permission check
-            if ($authenticatedUser->role !== 'admin') {
-                return redirect()->route('error.permission'); // Redirect to permission error page
-            }
+            // if ($authenticatedUser->role !== 'admin') {
+            //     return redirect()->route('error.permission'); // Redirect to permission error page
+            // }
 
-            return redirect()->route('home.page'); // Redirect to home page
+            return redirect()->route('home.page')->with('success', 'Login Telah Berhasil'); // Redirect to home page
         } else {
             return redirect()->back()->with('failed', 'Proses login gagal, silahkan coba kembali dengan data yang benar!');
         }

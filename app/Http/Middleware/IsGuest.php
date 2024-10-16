@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class IsUser
+class IsGuest
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class IsUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role =="user") {
+        if (Auth::check() == False) {
             return $next($request);
-    }else{
-        return redirect()->route("error.permission");
-    }
+        }else {
+            return redirect()->route('home.page');
+        }
     }
 }
