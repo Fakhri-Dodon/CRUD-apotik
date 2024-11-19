@@ -15,9 +15,9 @@
         <h4 class="text-center">Anda tidak diizinkan mengakses halaman ini!</h4>
         <div class="d-block m-auto">
             @if (Auth::user()->role == 'admin')
-                <a href="" class="btn btn-info mt-3">Kembali</a>
+                <a href="{{ route('home.page') }}" class="btn btn-info mt-3">Kembali</a>
             @else 
-                <a href="" class="btn btn-info mt-3">Kembali</a>
+                <a href="{{ route('home.page') }}" class="btn btn-info mt-3">Kembali</a>
             @endif
         </div>
     </div>

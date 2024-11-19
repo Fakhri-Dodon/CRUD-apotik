@@ -12,7 +12,7 @@
         @if (Session::get('success'))
             <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif
-
+        
         <div class="form-group">
             <label for="name" class="form-label">Nama Pengguna: </label>
             <input type="text" name="name" id="name" value="{{ old('name', $user['name']) }}" class="form-control">

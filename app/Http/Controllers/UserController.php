@@ -64,7 +64,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => $request->role,
-        ]);
+        ]); 
 
 
         return redirect()->route('user.index')->with('success', 'User updated successfully!');
@@ -108,6 +108,6 @@ class UserController extends Controller
         //menghapus session Auth
         Auth::logout();
         //mengarahkan halaman setelah menghapus session
-        return redirect('/');
+        return redirect()->route('login')->with('logout', 'Anda Telah Logout!');
     }
 }

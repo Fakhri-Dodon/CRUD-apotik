@@ -43,7 +43,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     // public function medicine() {
     //     return $this->hasOne(Medicine::class, 'medicine_id', 'user_id');
     // }
+
+    public function order() {
+        return $this->hasMany(Order::class);
+    }
 }

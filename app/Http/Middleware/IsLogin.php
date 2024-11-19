@@ -19,7 +19,7 @@ class IsLogin
         if (Auth::check()){
             return $next($request);
         }else{
-            return redirect()->route("login")->with("canAccess","Silahkan Login Terlebih Dahulu!");
+            return redirect()->route('login')->with('canAccess','Silahkan Login Terlebih Dahulu!');
         }
     }
 }

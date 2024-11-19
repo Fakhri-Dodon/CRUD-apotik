@@ -10,7 +10,7 @@
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container">
-              <a class="navbar-brand" href="#">Apotek App</a>
+              <a class="navbar-brand" href="{{ route('home.page') }}">Apotek App</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -31,9 +31,15 @@
                     </ul>
                   </li>
                 @endif
+                @if (Auth::user()->role == "admin")
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Pembelian</a>
+                    <a class="nav-link" aria-current="page" href="{{ route('order.admin.index') }}">Pembelian</a>
                   </li>
+                @else
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{ route('kasir.order.index') }}">Pembelian</a>
+                  </li>
+                @endif
                 @if (Auth::user()->role == "admin")
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{route('user.index')}}">Kelola Akun</a>
@@ -52,7 +58,7 @@
             </div>
         </nav>
 
-        <div class="container mt-5">
+        <div class="container mt-5 mb-3">
             @yield('content')
         </div>
 

@@ -43,7 +43,7 @@
                             <td>{{ $item['name'] }}</td>
                             <td>{{ $item['type'] }}</td>
                             <td>Rp. {{  number_format($item['price'], 0, ',', '.') }}</td>
-                            <td style="cursor: pointer" class="{{ $item['stock'] >= 3 ? 'bg-danger text-white' : '' }}" onclick="showModalStock('{{$item->id}}', '{{$item->name}}', '{{$item->stock}}')">{{ $item['stock'] }}</td>
+                            <td style="cursor: pointer" class="{{ $item['stock'] <= 5 ? 'bg-danger text-white' : '' }}" onclick="showModalStock('{{$item->id}}', '{{$item->name}}', '{{$item->stock}}')">{{ $item['stock'] }}</td>
                             <td class="d-flex">
                                 {{-- , $item['id'] pada route akan mengisi path dinamis {id} --}}
                                 <a href="{{ route('medicines.edit', $item['id']) }}" class="btn btn-primary me-2">Edit</a>

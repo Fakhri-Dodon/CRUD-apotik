@@ -51,9 +51,9 @@ class MedicineController extends Controller
         ]);
 
         if ($proses) {
-            return redirect()->route('medicines.index')->with('success', 'Berhasil mengubah data obat!');
+            return redirect()->back()->with('success', 'Berhasil Menambahkan data obat!');
         } else {
-            return redirect()->back()->with('failed', 'Gagal mengubah data obat!');
+            return redirect()->back()->with('failed', 'Gagal Menambahkan data obat!');
         }
     }
 

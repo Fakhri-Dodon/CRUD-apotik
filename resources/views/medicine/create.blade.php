@@ -1,6 +1,13 @@
 @extends('layouts.layout')
 
 @section('content')
+    @if (Session::get('success'))
+        <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
+    @if (Session::get('failed'))
+        <div class="alert alert-danger">{{ Session::get('failed') }}</div>
+    @endif
+
     <form action="{{ route('medicines.store')}}" method="POST" class="card p-5">
         {{-- 
             1. tag <form> attr action & method
